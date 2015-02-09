@@ -248,15 +248,26 @@ input {
   }
 }
 
-/* Entries index */
+/* Categories index */
 
-.entriesindex {
+.categoriesindex {
   list-style: none;
   margin: 0;
   li {
     overflow: auto;
     padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
+    border-top: 1px solid $gray-lighter;
+    margin-top: 60px;
+  }
+  .title {
+    font-size: 2em;
+    letter-spacing: -2px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+  .intro {
+    display: block;
+    margin-bottom: 20px;
   }
 }
 
@@ -306,7 +317,7 @@ input {
     margin-right: 10px;
     margin-top: 5px;
   }
-}z
+}
 
 aside {
   textarea {
@@ -322,3 +333,19 @@ span.picture {
   }
 }
 
+.button {
+  overflow: auto;
+  margin-top: 50px;
+  padding: 0;
+  span {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $gray-lighter;
+    color: gray;
+    width: 50%;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+  }
+}
