@@ -11,5 +11,13 @@ Rails.application.routes.draw do
   
   resources :users 
   resources :relationships,       only: [:create, :destroy]
+  resources :categories
+
+#  namespace :admin do
+#    root 'session#new'
+#    resources :users
+#    resources :sessions
+#    resources :categories
+#  end
 
 end

@@ -1,0 +1,9 @@
+<li id="category-<%= category.id %>">
+  <span class="title"><%= category.title %></span>
+  <span class="intro">
+  	<p><%= category.intro %></p>
+  </span>
+  <%= form_for("#", remote: true) do |f| %>
+ 		<%= f.submit "Start", class: "btn btn-primary" %>
+	<% end %>
+</li>
