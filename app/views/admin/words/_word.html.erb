@@ -1,0 +1,9 @@
+<tr id="word-<%= word.id %>">
+  <td><%= word.content %></td>
+  <td><% word.definitions.each do |definition| %>
+    <% if definition.value %>
+      <%= definition.word_def %>
+    <% end %>
+  <% end %>
+  </td>
+</tr>

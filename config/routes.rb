@@ -9,15 +9,21 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   
-  resources :users 
+  resources :users,               only: [:index, :new, :show, :edit, :update]
   resources :relationships,       only: [:create, :destroy]
-  resources :categories
+  resources :categories,          only: [:index, :show]
+  resources :words,               only: [:index]        
 
-#  namespace :admin do
-#    root 'session#new'
-#    resources :users
-#    resources :sessions
-#    resources :categories
-#  end
+  namespace :admin do
+    root                'static_pages#home'
+    get    'login'   => 'sessions#new'
+    post   'login'   => 'sessions#create'
+    delete 'logout'  => 'sessions#destroy'
+
+    resources :users,              except: [:new, :create]
+    resources :categories
+    resources :words
+             
+  end
 
 end

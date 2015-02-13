@@ -1,0 +1,29 @@
+<% if logged_in? %>
+    <% provide(:title, "New Word") %>
+    <h1>Create a new word</h1>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <%= form_for( [:admin, setup_word(@word)]) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <div >
+            <strong>Please select the category</strong> 
+            <%= f.collection_select :category_id, Category.all, :id, :title %>
+            <%= f.label :word %>
+            <%= f.text_field :content, placeholder: "New word..." %>
+            <%= f.label :answer %>
+            <%= f.fields_for :definitions do |builder| %>
+            <div>
+              <%= builder.text_field :word_def, placeholder: "Definition..." %> 
+              <%= builder.label :value, class: "checkbox inline" do %>
+                <%= builder.check_box :value %>
+                <span>Correct answer</span>
+              <% end %>
+            </div>
+            <% end %>
+          </div>
+          <%= f.submit "Create", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+<% end %>

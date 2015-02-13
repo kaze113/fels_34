@@ -44,6 +44,12 @@ module SessionsHelper
       redirect_to login_url
     end
   end
+
+  # Confirms the correct user.
+  def correct_user
+    @user = User.find params[:id]
+    redirect_to(root_url) unless current_user?(@user)
+  end
   
   # Forgets a persistent session.
   def forget(user)
@@ -70,4 +76,16 @@ module SessionsHelper
     session[:forwarding_url] = request.url if request.get?
   end
 
+  #Returns true if the user is admin, false otherwise
+  def admin?
+    current_user.admin == true
+  end
+
+  def logged_in_admin
+    if !logged_in? || (logged_in? && !admin?)      
+      store_location
+      flash[:danger] = "Please log in."
+      redirect_to admin_login_path
+    end
+  end
 end
