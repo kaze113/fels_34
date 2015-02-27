@@ -1,0 +1,19 @@
+<% provide(:title, @category.title) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <%= render 'shared/user_info' %>
+    </section>
+    <section class="category">
+      <%= button_to "Add new category", new_admin_category_path, method: :get, class: "btn btn-default" %>
+      <%= button_to "Edit category", edit_admin_category_path, method: :get, class: "btn btn-default" %>
+      <%= button_to "Delete category", admin_category_path(@category), method: :delete, data: { confirm: "You sure?" }, class: "btn btn-default" %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <ol class="categories">
+      <h1><%= @category.title %></h1>
+      <p><%= simple_format(@category.intro) %></p>
+    </ol>
+  </div>
+</div>

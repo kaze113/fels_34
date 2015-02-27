@@ -1,0 +1,29 @@
+<% provide(:title, 'Word List') %>
+<div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        <%= button_to "Add new words", new_admin_word_path, method: :get, class: "btn btn-default " %><br/>
+      </section>   
+    </aside>
+  <div class="col-md-8"> 
+    <h1>Words list</h1>
+    <%= form_tag '', url: admin_words_path, method: :get do %>
+      <span>
+        <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :title) %>
+        <%= submit_tag "Filter" %>
+      </span>
+    <% end %>
+    <table class="table table-striped">
+      <tr>
+        <th>Word</th>
+        <th>Definition</th>
+      </tr>
+      <% @words.each do |word| %>
+        <%= render word %>
+      <% end %>
+    </table>
+  </div>
+</div>

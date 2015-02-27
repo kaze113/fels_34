@@ -1,0 +1,21 @@
+<% provide(:title, 'Word List') %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2"> 
+    <h1>Words list</h1>
+    <%= form_tag '', url: words_path, method: :get do %>
+      <span>
+        <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :title) %>
+        <%= submit_tag "Filter" %>
+      </span>
+    <% end %>
+    <table class="table table-striped">
+      <tr>
+        <th>Word</th>
+        <th>Definition</th>
+      </tr>
+      <% @words.each do |word| %>
+        <%= render word %>
+      <% end %>
+    </table>
+  </div>
+</div>
