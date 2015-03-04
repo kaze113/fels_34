@@ -20,10 +20,14 @@ Rails.application.routes.draw do
     post   'login'   => 'sessions#create'
     delete 'logout'  => 'sessions#destroy'
 
-    resources :users,              except: [:new, :create]
-    resources :categories
-    resources :words
-             
-  end
+    resources :users,              except: [:new, :create]     
+    resources :words   
+    resources :lessons 
+    resources :results
 
+    resources :categories do
+      resources :words
+    end
+    
+  end
 end

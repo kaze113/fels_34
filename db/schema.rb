@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227060753) do
+ActiveRecord::Schema.define(version: 20150303070319) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20150227060753) do
 
   add_index "definitions", ["word_id"], name: "index_definitions_on_word_id", using: :btree
 
+  create_table "lessons", force: :cascade do |t|
+    t.integer  "category_id", limit: 4
+    t.integer  "user_id",     limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "word_ids",    limit: 255, default: ""
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id", limit: 4
     t.integer  "followed_id", limit: 4
@@ -42,6 +50,14 @@ ActiveRecord::Schema.define(version: 20150227060753) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+
+  create_table "results", force: :cascade do |t|
+    t.integer  "lesson_id",     limit: 4
+    t.integer  "word_id",       limit: 4
+    t.integer  "definition_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",            limit: 255
