@@ -1,0 +1,34 @@
+<% provide(:title, "Result") %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <%= render 'shared/user_info' %>
+      <section class="stats">
+      <%= render 'shared/stats' %>
+      </section>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <h3>
+      <%= @category.title %>
+      <%= @results.correct.count%>/20
+    </h3><br/><br/>
+    <table class="table table-striped">
+      <% @results.each do |result| %>
+        <tr>
+          <td><%= result.word.content %></td>
+          <td>
+            <% if !result.definition.nil?%>
+              <%= result.definition.word_def %>
+            <% end %>
+          </td>
+          <td>
+            <% if result.correct %> T
+            <% else %> F
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

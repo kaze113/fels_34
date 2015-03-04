@@ -8,11 +8,16 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-  
+
   resources :users,               only: [:index, :new, :show, :edit, :update]
   resources :relationships,       only: [:create, :destroy]
   resources :categories,          only: [:index, :show]
-  resources :words,               only: [:index]        
+  resources :words,               only: [:index]  
+  resources :lessons,             only: [:edit, :show, :update]
+
+  resources :categories do
+    resources :lessons,           only: [:create]
+  end
 
   namespace :admin do
     root                'static_pages#home'

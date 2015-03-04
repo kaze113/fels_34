@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303070319) do
+ActiveRecord::Schema.define(version: 20150309090044) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -35,9 +35,8 @@ ActiveRecord::Schema.define(version: 20150303070319) do
   create_table "lessons", force: :cascade do |t|
     t.integer  "category_id", limit: 4
     t.integer  "user_id",     limit: 4
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.string   "word_ids",    limit: 255, default: ""
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -55,8 +54,9 @@ ActiveRecord::Schema.define(version: 20150303070319) do
     t.integer  "lesson_id",     limit: 4
     t.integer  "word_id",       limit: 4
     t.integer  "definition_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.boolean  "correct",       limit: 1, default: false
   end
 
   create_table "users", force: :cascade do |t|

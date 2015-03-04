@@ -3,7 +3,8 @@
   <span class="intro">
   	<p><%= category.intro %></p>
   </span>
-  <%= form_for("#", remote: true) do |f| %>
- 		<%= f.submit "Start", class: "btn btn-primary" %>
-	<% end %>
+  <%= form_for :lesson, url: category_lessons_path(category), method: :post do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.submit "Start", class: "btn btn-primary" %>
+  <% end %>
 </li>

@@ -15,3 +15,8 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+function next_question(index) {
+  document.getElementById("result-" + index).setAttribute("class", "hidden")
+  document.getElementById("result-" + (index+1)).setAttribute("class", "")
+}

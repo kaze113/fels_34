@@ -14,5 +14,6 @@ class Word < ActiveRecord::Base
                            .where(lesson_id: Lesson.select("id").where("user_id = ?", user.id))}
   scope :not_learned, ->(user){where "id NOT IN (?)", Result.select("word_id")
                                .where(lesson_id: Lesson.select("id").where("user_id = ?", user.id))}      
+  scope :create_20_questions, ->(category){where("category_id = ?", category.id).limit(20).order("RAND()")}                             
 
 end
