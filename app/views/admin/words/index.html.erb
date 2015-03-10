@@ -3,16 +3,19 @@
     <aside class="col-md-4">
       <section class="user_info">
         <%= render 'shared/user_info' %>
-      </section>
-      <section>
-        <%= button_to "Add new words", new_admin_word_path, method: :get, class: "btn btn-default " %><br/>
-      </section>   
+      </section>  
     </aside>
   <div class="col-md-8"> 
     <h1>Words list</h1>
     <%= form_tag '', url: admin_words_path, method: :get do %>
       <span>
-        <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :title) %>
+        <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :title), {prompt: "Select a category"} %>
+        <%= radio_button_tag :status, "learned" %>
+        <%= label_tag :status, "learned" %>
+        <%= radio_button_tag :status, "not_learned" %>
+        <%= label_tag :status, "not learned" %>
+        <%= radio_button_tag :status, "" %>
+        <%= label_tag :status, "all" %>
         <%= submit_tag "Filter" %>
       </span>
     <% end %>
@@ -21,8 +24,10 @@
         <th>Word</th>
         <th>Definition</th>
       </tr>
-      <% @words.each do |word| %>
-        <%= render word %>
+      <% if @words.any? %>
+        <%= render partial: 'word', collection: @words %>
+      <% else %>
+        <p>No words founds</p>
       <% end %>
     </table>
   </div>

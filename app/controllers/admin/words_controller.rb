@@ -6,12 +6,29 @@ class Admin::WordsController < ApplicationController
     if params[:category_id].present?
       @category = Category.find params[:category_id]
       @words = @category.words
-    else
-      @words = Word.all
+      if params[:status].present?
+        if params[:status] == "learned"
+          @words = @words.learned current_user
+        elsif params[:status] == "not_learned" 
+          @words = @words.not_learned current_user
+        end
+      end
+    
+    elsif params[:status].present? && params[:category_id].nil?
+      if params[:status] == "learned"
+        @words = Word.learned current_user
+      elsif params[:status] == "not_learned" 
+        @words = @words.not_learned current_user
+      end
+
+    else params[:status].nil? && params[:category_id].nil?
+      @words = Word.all 
     end
+    
   end
 
   def new
+    @category = Category.find params[:category_id]
     @word = Word.new
     4.times {
       @word.definitions.build
